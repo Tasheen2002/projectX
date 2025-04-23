@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/AppNavigator';
+import React, {useState} from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../navigation/AppNavigator';
 import InputComponent from '../components/InputComponent';
 import ButtonComponent from '../components/ButtonComponent';
-import { useTask } from '../hooks/useTask';
-import { Task } from '../store/taskSlice';
+import {useTask} from '../hooks/useTask';
+import {Task} from '../store/taskSlice';
 
 type CreateTaskScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'CreateTask'>;
 };
 
-const CreateTaskScreen: React.FC<CreateTaskScreenProps> = ({ navigation }) => {
+const CreateTaskScreen: React.FC<CreateTaskScreenProps> = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
-  const [errors, setErrors] = useState({ title: '', description: '', dueDate: '' });
+  const [errors, setErrors] = useState({
+    title: '',
+    description: '',
+    dueDate: '',
+  });
 
-  const { createTask } = useTask();
+  const {createTask} = useTask();
 
   const validateInputs = () => {
     let isValid = true;
-    const newErrors = { title: '', description: '', dueDate: '' };
+    const newErrors = {title: '', description: '', dueDate: ''};
 
     if (!title.trim()) {
       newErrors.title = 'Title is required';
@@ -51,7 +55,11 @@ const CreateTaskScreen: React.FC<CreateTaskScreenProps> = ({ navigation }) => {
   const handleCreateTask = () => {
     if (validateInputs()) {
       const [month, day, year] = dueDate.split('/');
-      const dueDateObj = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+      const dueDateObj = new Date(
+        parseInt(year),
+        parseInt(month) - 1,
+        parseInt(day),
+      );
 
       const newTask: Omit<Task, 'id'> = {
         title,
@@ -96,10 +104,10 @@ const CreateTaskScreen: React.FC<CreateTaskScreenProps> = ({ navigation }) => {
         />
         <View style={styles.buttonContainer}>
           <ButtonComponent title="Create Task" onPress={handleCreateTask} />
-          <ButtonComponent 
-            title="Cancel" 
-            primary={false} 
-            onPress={() => navigation.goBack()} 
+          <ButtonComponent
+            title="Cancel"
+            primary={false}
+            onPress={() => navigation.goBack()}
           />
         </View>
       </View>

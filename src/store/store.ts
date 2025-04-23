@@ -1,19 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import taskReducer from './taskSlice';
-import { loadTasks } from '../utils/storage';
+import {loadTasks} from '../utils/storage';
 
 // Load initial state from storage
 const preloadedState = {
   tasks: {
-    tasks: loadTasks() || []
-  }
+    tasks: loadTasks() || [],
+  },
 };
 
 export const store = configureStore({
   reducer: {
     tasks: taskReducer,
   },
-  preloadedState
+  preloadedState,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

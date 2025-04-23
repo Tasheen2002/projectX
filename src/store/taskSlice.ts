@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
-import { saveTasks } from '../utils/storage';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {RootState} from './store';
+import {saveTasks} from '../utils/storage';
 
 export interface Task {
   id: string;
@@ -28,7 +28,9 @@ export const taskSlice = createSlice({
       saveTasks(state.tasks);
     },
     updateTask: (state, action: PayloadAction<Task>) => {
-      const index = state.tasks.findIndex(task => task.id === action.payload.id);
+      const index = state.tasks.findIndex(
+        task => task.id === action.payload.id,
+      );
       if (index !== -1) {
         state.tasks[index] = action.payload;
         saveTasks(state.tasks);
@@ -44,11 +46,11 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { addTask, updateTask, deleteTask, setTasks } = taskSlice.actions;
+export const {addTask, updateTask, deleteTask, setTasks} = taskSlice.actions;
 
 // Selectors
 export const selectTasks = (state: RootState) => state.tasks.tasks;
-export const selectTaskById = (state: RootState, taskId: string) => 
+export const selectTaskById = (state: RootState, taskId: string) =>
   state.tasks.tasks.find(task => task.id === taskId);
 
 export default taskSlice.reducer;

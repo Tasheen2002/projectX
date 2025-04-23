@@ -1,25 +1,25 @@
 import React from 'react';
-import { View, TextInput, Text, StyleSheet, TextInputProps } from 'react-native';
-import { colors } from '../theme/color';
+import {View, TextInput, Text, StyleSheet, TextInputProps} from 'react-native';
+import {colors} from '../theme/color';
 
 interface InputComponentProps extends TextInputProps {
   label: string;
   error?: string;
 }
 
-const InputComponent: React.FC<InputComponentProps> = ({ 
-  label, 
-  error, 
-  style, 
-  ...props 
+const InputComponent: React.FC<InputComponentProps> = ({
+  label,
+  error,
+  style,
+  ...props
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput 
-        style={[styles.input, error ? styles.inputError : null, style]} 
+      <TextInput
+        style={[styles.input, error ? styles.inputError : null, style]}
         placeholderTextColor={colors.textLight}
-        {...props} 
+        {...props}
       />
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
     </View>

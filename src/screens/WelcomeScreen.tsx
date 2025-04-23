@@ -1,21 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/AppNavigator';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../navigation/AppNavigator';
 import ButtonComponent from '../components/ButtonComponent';
-import { colors } from '../theme/color';
+import {colors} from '../theme/color';
 
 type WelcomeScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Welcome'>;
 };
 
-const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
+const WelcomeScreen: React.FC<WelcomeScreenProps> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Image 
-          source={require('../assets/images/placeholder.jpg')} 
-          style={styles.image} 
+        <Image
+          source={require('../assets/images/placeholder.jpeg')}
+          style={styles.image}
           resizeMode="contain"
         />
         <Text style={styles.title}>Task Manager</Text>
@@ -24,8 +24,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
         </Text>
       </View>
       <View style={styles.footer}>
-        <ButtonComponent 
-          title="Get Started" 
+        <ButtonComponent
+          title="Get Started"
           onPress={() => navigation.navigate('Tasks')}
         />
       </View>
