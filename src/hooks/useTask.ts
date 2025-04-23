@@ -1,38 +1,44 @@
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { 
-  selectTasks, 
-  selectTaskById, 
-  addTask, 
-  updateTask, 
-  deleteTask, 
-  Task 
+import {useCallback} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  selectTasks,
+  selectTaskById,
+  addTask,
+  updateTask,
+  deleteTask,
+  Task,
 } from '../store/taskSlice';
+import {RootState} from '../store/store';
 
 export const useTask = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(selectTasks);
 
-  const getTaskById = useCallback((taskId: string) => {
-    return useSelector((state) => selectTaskById(state, taskId));
-  }, []);
+  const getTaskById = useCallback(
+    (taskId: string) => {
+      const state = {tasks: {tasks}}; // Match expected state shape
+      return selectTaskById(state as RootState, taskId);
+    },
+    [tasks],
+  );
 
-  const createTask = useCallback((task: Omit<Task, 'id'>) => {
+  const createTask = (task: Omit<Task, 'id'>) => {
     const newTask: Task = {
       ...task,
-      id: Date.now().toString(), // Simple ID generation
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
     };
     dispatch(addTask(newTask));
     return newTask;
-  }, [dispatch]);
+  };
 
-  const editTask = useCallback((task: Task) => {
+  const editTask = (task: Task) => {
     dispatch(updateTask(task));
-  }, [dispatch]);
+  };
 
-  const removeTask = useCallback((taskId: string) => {
+  const removeTask = (taskId: string) => {
     dispatch(deleteTask(taskId));
-  }, [dispatch]);
+  };
 
   return {
     tasks,

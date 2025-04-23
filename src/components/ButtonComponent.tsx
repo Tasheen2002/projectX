@@ -1,27 +1,31 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps } from 'react-native';
-import { colors } from '../theme/color';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  TouchableOpacityProps,
+} from 'react-native';
+import {colors} from '../theme/color';
 
 interface ButtonComponentProps extends TouchableOpacityProps {
   title: string;
   primary?: boolean;
 }
 
-const ButtonComponent: React.FC<ButtonComponentProps> = ({ 
-  title, 
-  primary = true, 
-  style, 
-  ...props 
+const ButtonComponent: React.FC<ButtonComponentProps> = ({
+  title,
+  primary = true,
+  style,
+  ...props
 }) => {
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[
-        styles.button, 
+        styles.button,
         primary ? styles.primaryButton : styles.secondaryButton,
-        style
-      ]} 
-      {...props}
-    >
+        style,
+      ]}
+      {...props}>
       <Text style={primary ? styles.primaryText : styles.secondaryText}>
         {title}
       </Text>
