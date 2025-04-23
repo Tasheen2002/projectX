@@ -8,40 +8,37 @@ import {
   deleteTask,
   Task,
 } from '../store/taskSlice';
+import {RootState} from '../store/store';
 
 export const useTask = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(selectTasks);
 
-  const getTaskById = useCallback((taskId: string) => {
-    return useSelector(state => selectTaskById(state, taskId));
-  }, []);
-
-  const createTask = useCallback(
-    (task: Omit<Task, 'id'>) => {
-      const newTask: Task = {
-        ...task,
-        id: Date.now().toString(), // Simple ID generation
-      };
-      dispatch(addTask(newTask));
-      return newTask;
-    },
-    [dispatch],
-  );
-
-  const editTask = useCallback(
-    (task: Task) => {
-      dispatch(updateTask(task));
-    },
-    [dispatch],
-  );
-
-  const removeTask = useCallback(
+  const getTaskById = useCallback(
     (taskId: string) => {
-      dispatch(deleteTask(taskId));
+      const state = {tasks: {tasks}}; // Match expected state shape
+      return selectTaskById(state as RootState, taskId);
     },
-    [dispatch],
+    [tasks],
   );
+
+  const createTask = (task: Omit<Task, 'id'>) => {
+    const newTask: Task = {
+      ...task,
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
+    };
+    dispatch(addTask(newTask));
+    return newTask;
+  };
+
+  const editTask = (task: Task) => {
+    dispatch(updateTask(task));
+  };
+
+  const removeTask = (taskId: string) => {
+    dispatch(deleteTask(taskId));
+  };
 
   return {
     tasks,

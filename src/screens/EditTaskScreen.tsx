@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, Alert} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '../navigation/AppNavigator';
 import InputComponent from '../components/InputComponent';
 import ButtonComponent from '../components/ButtonComponent';
 import {useTask} from '../hooks/useTask';
+import {useSelector} from 'react-redux';
+import {selectTaskById} from '../store/taskSlice';
+import {RootState} from '../store/store';
 
 type EditTaskScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'EditTask'>;
@@ -14,7 +17,8 @@ type EditTaskScreenProps = {
 
 const EditTaskScreen: React.FC<EditTaskScreenProps> = ({navigation, route}) => {
   const {taskId} = route.params;
-  const {getTaskById, editTask} = useTask();
+  const task = useSelector((state: RootState) => selectTaskById(state, taskId));
+  const {editTask} = useTask();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -27,21 +31,22 @@ const EditTaskScreen: React.FC<EditTaskScreenProps> = ({navigation, route}) => {
   });
 
   useEffect(() => {
-    const task = getTaskById(taskId);
-    if (task) {
-      setTitle(task.title);
-      setDescription(task.description);
-
-      // Format the ISO date string to MM/DD/YYYY
-      const date = new Date(task.dueDate);
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      const year = date.getFullYear();
-      setDueDate(`${month}/${day}/${year}`);
-
-      setStatus(task.status);
+    if (!task) {
+      Alert.alert('Error', 'Task not found');
+      navigation.goBack();
+      return;
     }
-  }, [taskId, getTaskById]);
+
+    setTitle(task.title);
+    setDescription(task.description);
+
+    const date = new Date(task.dueDate);
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    setDueDate(`${month}/${day}/${year}`);
+    setStatus(task.status);
+  }, [task, navigation]);
 
   const validateInputs = () => {
     let isValid = true;
@@ -73,12 +78,12 @@ const EditTaskScreen: React.FC<EditTaskScreenProps> = ({navigation, route}) => {
   };
 
   const handleUpdateTask = () => {
-    if (validateInputs()) {
+    if (validateInputs() && task) {
       const [month, day, year] = dueDate.split('/');
       const dueDateObj = new Date(
-        parseInt(year),
-        parseInt(month) - 1,
-        parseInt(day),
+        parseInt(year, 10),
+        parseInt(month, 10) - 1,
+        parseInt(day, 10),
       );
 
       const updatedTask = {
@@ -87,7 +92,7 @@ const EditTaskScreen: React.FC<EditTaskScreenProps> = ({navigation, route}) => {
         description,
         dueDate: dueDateObj.toISOString(),
         status,
-        createdAt: new Date().toISOString(), // We'd normally preserve the original creation date
+        createdAt: task.createdAt,
       };
 
       editTask(updatedTask);
@@ -122,6 +127,12 @@ const EditTaskScreen: React.FC<EditTaskScreenProps> = ({navigation, route}) => {
           value={dueDate}
           onChangeText={setDueDate}
           error={errors.dueDate}
+        />
+        <InputComponent
+          label="Status"
+          placeholder="Enter status"
+          value={status}
+          onChangeText={setStatus}
         />
         <View style={styles.buttonContainer}>
           <ButtonComponent title="Update Task" onPress={handleUpdateTask} />
