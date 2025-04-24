@@ -9,20 +9,20 @@ import {
   Task,
 } from '../store/taskSlice';
 import {RootState} from '../store/store';
-import {saveTasks} from '../utils/storage';//
+import {saveTasks} from '../utils/storage';
 
 export const useTask = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(selectTasks);
 
-  // Save tasks on every change
+  // Save tasks to AsyncStorage whenever they change
   useEffect(() => {
     saveTasks(tasks);
   }, [tasks]);
 
   const getTaskById = useCallback(
     (taskId: string) => {
-      const state = {tasks: {tasks}};
+      const state = {tasks: {tasks}}; // Match expected state shape
       return selectTaskById(state as RootState, taskId);
     },
     [tasks],
@@ -46,11 +46,16 @@ export const useTask = () => {
     dispatch(deleteTask(taskId));
   };
 
+  const completedTasks = tasks.filter(task => task.status === 'completed');
+  const pendingTasks = tasks.filter(task => task.status !== 'completed');
+
   return {
     tasks,
     getTaskById,
     createTask,
     editTask,
     removeTask,
+    completedTasks,
+    pendingTasks,
   };
 };
