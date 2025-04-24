@@ -11,7 +11,7 @@ export const saveTasks = async (tasks: Task[]) => {
     console.error('Error saving tasks to storage:', e);
   }
 };
-
+//
 export const loadTasks = async (): Promise<Task[] | null> => {
   try {
     const jsonValue = await AsyncStorage.getItem(TASKS_STORAGE_KEY);

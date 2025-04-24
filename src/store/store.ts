@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import taskReducer, {setTasks} from './taskSlice';
-import {loadTasks} from '../utils/storage'; // Adjust the path as needed
+import {loadTasks} from '../utils/storage';
 
 export const store = configureStore({
   reducer: {
