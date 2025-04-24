@@ -10,3 +10,4 @@ export const colors = {
   warning: '#F59E0B', // Amber
   info: '#3B82F6', // Blue
 };
+export default colors;
