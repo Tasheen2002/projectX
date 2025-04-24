@@ -1,30 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RouteProp } from '@react-navigation/native';
-import { RootStackParamList } from '../navigation/AppNavigator';
+import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RouteProp} from '@react-navigation/native';
+import {RootStackParamList} from '../navigation/AppNavigator';
 import ButtonComponent from '../components/ButtonComponent';
-import { useTask } from '../hooks/useTask';
-import { colors } from '../theme/color';
+import {useTask} from '../hooks/useTask';
+import {colors} from '../theme/color';
 
 type TaskDetailScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'TaskDetail'>;
   route: RouteProp<RootStackParamList, 'TaskDetail'>;
 };
 
-const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ navigation, route }) => {
-  const { taskId } = route.params;
-  const { getTaskById, removeTask, editTask } = useTask();
-  
+const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
+  navigation,
+  route,
+}) => {
+  const {taskId} = route.params;
+  const {getTaskById, removeTask, editTask} = useTask();
+
   const task = getTaskById(taskId);
 
   if (!task) {
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>Task not found</Text>
-        <ButtonComponent 
-          title="Go Back" 
-          onPress={() => navigation.navigate('Tasks')} 
+        <ButtonComponent
+          title="Go Back"
+          onPress={() => navigation.navigate('Tasks')}
         />
       </View>
     );
@@ -40,56 +43,57 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ navigation, route }
   };
 
   const handleDeleteTask = () => {
-    Alert.alert(
-      "Delete Task",
-      "Are you sure you want to delete this task?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel"
+    Alert.alert('Delete Task', 'Are you sure you want to delete this task?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        onPress: () => {
+          removeTask(taskId);
+          navigation.navigate('Tasks');
         },
-        { 
-          text: "Delete", 
-          onPress: () => {
-            removeTask(taskId);
-            navigation.navigate('Tasks');
-          },
-          style: "destructive"
-        }
-      ]
-    );
+        style: 'destructive',
+      },
+    ]);
   };
 
   const handleMarkAsCompleted = () => {
     editTask({
       ...task,
-      status: 'completed'
+      status: 'completed',
     });
     // Force a re-render
-    navigation.setParams({ taskId: task.id });
+    navigation.setParams({taskId: task.id});
   };
 
   const handleMarkInProgress = () => {
     editTask({
       ...task,
-      status: 'in-progress'
+      status: 'in-progress',
     });
     // Force a re-render
-    navigation.setParams({ taskId: task.id });
+    navigation.setParams({taskId: task.id});
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{task.title}</Text>
-        <View style={[styles.statusBadge, 
-          task.status === 'completed' ? styles.completedBadge : 
-          task.status === 'in-progress' ? styles.inProgressBadge : styles.pendingBadge
-        ]}>
+        <View
+          style={[
+            styles.statusBadge,
+            task.status === 'completed'
+              ? styles.completedBadge
+              : task.status === 'in-progress'
+              ? styles.inProgressBadge
+              : styles.pendingBadge,
+          ]}>
           <Text style={styles.statusText}>{task.status}</Text>
         </View>
       </View>
-      
+
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Description</Text>
         <Text style={styles.description}>{task.description}</Text>
@@ -104,30 +108,30 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ navigation, route }
         <Text style={styles.sectionTitle}>Created On</Text>
         <Text style={styles.date}>{formatDate(task.createdAt)}</Text>
       </View>
-      
+
       <View style={styles.buttonContainer}>
         {task.status === 'pending' && (
-          <ButtonComponent 
-            title="Mark as In Progress" 
-            onPress={handleMarkInProgress} 
+          <ButtonComponent
+            title="Mark as In Progress"
+            onPress={handleMarkInProgress}
             style={styles.inProgressButton}
           />
         )}
         {task.status !== 'completed' && (
-          <ButtonComponent 
-            title="Mark as Completed" 
-            onPress={handleMarkAsCompleted} 
+          <ButtonComponent
+            title="Mark as Completed"
+            onPress={handleMarkAsCompleted}
             style={styles.completedButton}
           />
         )}
-        <ButtonComponent 
-          title="Edit Task" 
-          onPress={() => navigation.navigate('EditTask', { taskId })} 
+        <ButtonComponent
+          title="Edit Task"
+          onPress={() => navigation.navigate('EditTask', {taskId})}
           primary={false}
         />
-        <ButtonComponent 
-          title="Delete Task" 
-          onPress={handleDeleteTask} 
+        <ButtonComponent
+          title="Delete Task"
+          onPress={handleDeleteTask}
           style={styles.deleteButton}
         />
       </View>
