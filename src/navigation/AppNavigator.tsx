@@ -5,8 +5,9 @@ import TaskScreen from '../screens/TaskScreen';
 import CreateTaskScreen from '../screens/CreateTaskScreen';
 import EditTaskScreen from '../screens/EditTaskScreen';
 import TaskDetailScreen from '../screens/TaskDetailScreen';
-import ProfileScreen from '../screens/ProfileScreen'; // Import ProfileScreen
+import ProfileScreen from '../screens/ProfileScreen';
 import {colors} from '../theme/color';
+import {TouchableOpacity, Image} from 'react-native';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -14,7 +15,7 @@ export type RootStackParamList = {
   CreateTask: undefined;
   EditTask: {taskId: string};
   TaskDetail: {taskId: string};
-  Profile: undefined; // Add Profile route
+  Profile: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -43,7 +44,22 @@ const AppNavigator = () => {
       <Stack.Screen
         name="Tasks"
         component={TaskScreen}
-        options={{title: 'My Tasks'}}
+        options={({navigation}) => ({
+          title: 'My Tasks',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+              <Image
+                source={require('../assets/icons/user.png')}
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 16,
+                  marginRight: 10,
+                }}
+              />
+            </TouchableOpacity>
+          ),
+        })}
       />
       <Stack.Screen
         name="CreateTask"

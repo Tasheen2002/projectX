@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
 import TaskComponent from '../components/TaskComponent';
@@ -30,16 +24,6 @@ const TaskScreen: React.FC<TaskScreenProps> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      {/* Profile Icon */}
-      <TouchableOpacity
-        style={styles.profileIconContainer}
-        onPress={() => navigation.navigate('Profile')}>
-        <Image
-          source={require('../assets/icons/user.png')} // Replace with your user image path
-          style={styles.profileIcon}
-        />
-      </TouchableOpacity>
-
       <FlatList
         data={tasks}
         renderItem={renderTask}
@@ -62,17 +46,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-  },
-  profileIconContainer: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
-    zIndex: 10,
-  },
-  profileIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
   },
   listContent: {
     padding: 16,
