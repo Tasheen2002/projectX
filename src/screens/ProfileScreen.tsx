@@ -13,7 +13,7 @@ const ProfileScreen: React.FC = () => {
         style={styles.profileImage}
       />
       <Text style={styles.name}>Tasheen Darshika</Text>
-      <Text style={styles.details}>Email: tasheendarshika@example.com</Text>
+      {/* <Text style={styles.details}>Email: tasheendarshika@example.com</Text> */}
       <Text style={styles.details}>Tasks Completed: {completedTasks.length}</Text>
       <Text style={styles.details}>Tasks Pending: {pendingTasks.length}</Text>
     </View>
