@@ -5,6 +5,7 @@ import TaskScreen from '../screens/TaskScreen';
 import CreateTaskScreen from '../screens/CreateTaskScreen';
 import EditTaskScreen from '../screens/EditTaskScreen';
 import TaskDetailScreen from '../screens/TaskDetailScreen';
+import ProfileScreen from '../screens/ProfileScreen'; // Import ProfileScreen
 import {colors} from '../theme/color';
 
 export type RootStackParamList = {
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   CreateTask: undefined;
   EditTask: {taskId: string};
   TaskDetail: {taskId: string};
+  Profile: undefined; // Add Profile route
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -57,6 +59,11 @@ const AppNavigator = () => {
         name="TaskDetail"
         component={TaskDetailScreen}
         options={{title: 'Task Details'}}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{title: 'Profile'}}
       />
     </Stack.Navigator>
   );
