@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {colors} from '../theme/color';
+import {useTask} from '../hooks/useTask';
 
 const ProfileScreen: React.FC = () => {
+  const {completedTasks, pendingTasks} = useTask();
+
   return (
     <View style={styles.container}>
       <Image
@@ -10,8 +13,9 @@ const ProfileScreen: React.FC = () => {
         style={styles.profileImage}
       />
       <Text style={styles.name}>Tasheen Darshika</Text>
-      <Text style={styles.details}>Email: tasheendarshika@example.com</Text>
-      <Text style={styles.details}>Tasks Completed: 0</Text>
+      {/* <Text style={styles.details}>Email: tasheendarshika@example.com</Text> */}
+      <Text style={styles.details}>Tasks Completed: {completedTasks.length}</Text>
+      <Text style={styles.details}>Tasks Pending: {pendingTasks.length}</Text>
     </View>
   );
 };
@@ -25,8 +29,8 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   profileImage: {
-    width: 120,
-    height: 120,
+    width: 300,
+    height: 300,
     borderRadius: 60,
     marginBottom: 16,
   },
