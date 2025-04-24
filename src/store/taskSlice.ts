@@ -1,4 +1,3 @@
-// taskSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from './store';
 
@@ -23,6 +22,9 @@ const taskSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
+    setTasks: (state, action: PayloadAction<Task[]>) => {
+      state.tasks = action.payload;
+    },
     addTask: (state, action: PayloadAction<Task>) => {
       state.tasks.push(action.payload);
     },
@@ -38,7 +40,7 @@ const taskSlice = createSlice({
   },
 });
 
-export const {addTask, updateTask, deleteTask} = taskSlice.actions;
+export const {setTasks, addTask, updateTask, deleteTask} = taskSlice.actions;
 
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 export const selectTaskById = (state: RootState, id: string) =>

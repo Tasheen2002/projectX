@@ -1,5 +1,4 @@
-//
-import {useCallback} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   selectTasks,
@@ -10,14 +9,20 @@ import {
   Task,
 } from '../store/taskSlice';
 import {RootState} from '../store/store';
+import {saveTasks} from '../utils/storage';
 
 export const useTask = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(selectTasks);
 
+  // Save tasks on every change
+  useEffect(() => {
+    saveTasks(tasks);
+  }, [tasks]);
+
   const getTaskById = useCallback(
     (taskId: string) => {
-      const state = {tasks: {tasks}}; // Match expected state shape
+      const state = {tasks: {tasks}};
       return selectTaskById(state as RootState, taskId);
     },
     [tasks],

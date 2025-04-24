@@ -12,12 +12,10 @@ export const saveTasks = async (tasks: Task[]) => {
   }
 };
 
-export const loadTasks = (): Task[] | null => {
+export const loadTasks = async (): Promise<Task[] | null> => {
   try {
-    // Note: In a real app, we'd use await here, but for simplicity in this example
-    // we're using a synchronous approach for the store initialization
-    const jsonValue = AsyncStorage.getItem(TASKS_STORAGE_KEY);
-    return jsonValue != null ? JSON.parse(jsonValue as string) : null;
+    const jsonValue = await AsyncStorage.getItem(TASKS_STORAGE_KEY);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     console.error('Error loading tasks from storage:', e);
     return null;
