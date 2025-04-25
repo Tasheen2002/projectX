@@ -44,10 +44,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
 
   const handleDeleteTask = () => {
     Alert.alert('Delete Task', 'Are you sure you want to delete this task?', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
+      {text: 'Cancel', style: 'cancel'},
       {
         text: 'Delete',
         onPress: () => {
@@ -64,7 +61,6 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
       ...task,
       status: 'completed',
     });
-    // Force a re-render
     navigation.setParams({taskId: task.id});
   };
 
@@ -73,7 +69,14 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
       ...task,
       status: 'in-progress',
     });
-    // Force a re-render
+    navigation.setParams({taskId: task.id});
+  };
+
+  const handleMarkAsPending = () => {
+    editTask({
+      ...task,
+      status: 'pending',
+    });
     navigation.setParams({taskId: task.id});
   };
 
@@ -110,7 +113,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
       </View>
 
       <View style={styles.buttonContainer}>
-        {task.status === 'pending' && (
+        {task.status !== 'in-progress' && (
           <ButtonComponent
             title="Mark as In Progress"
             onPress={handleMarkInProgress}
@@ -122,6 +125,13 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
             title="Mark as Completed"
             onPress={handleMarkAsCompleted}
             style={styles.completedButton}
+          />
+        )}
+        {task.status !== 'pending' && (
+          <ButtonComponent
+            title="Mark as Pending"
+            onPress={handleMarkAsPending}
+            style={styles.pendingButton}
           />
         )}
         <ButtonComponent
@@ -187,6 +197,9 @@ const styles = StyleSheet.create({
   },
   inProgressButton: {
     backgroundColor: colors.info,
+  },
+  pendingButton: {
+    backgroundColor: colors.warning,
   },
   deleteButton: {
     backgroundColor: colors.error,
