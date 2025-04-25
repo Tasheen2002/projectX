@@ -128,12 +128,6 @@ const EditTaskScreen: React.FC<EditTaskScreenProps> = ({navigation, route}) => {
           onChangeText={setDueDate}
           error={errors.dueDate}
         />
-        <InputComponent
-          label="Status"
-          placeholder="Enter status"
-          value={status}
-          onChangeText={setStatus}
-        />
         <View style={styles.buttonContainer}>
           <ButtonComponent title="Update Task" onPress={handleUpdateTask} />
           <ButtonComponent
