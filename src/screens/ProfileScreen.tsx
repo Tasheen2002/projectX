@@ -4,7 +4,7 @@ import {colors} from '../theme/color';
 import {useTask} from '../hooks/useTask';
 
 const ProfileScreen: React.FC = () => {
-  const {completedTasks, pendingTasks} = useTask();
+  const {completedTasks, pendingTasks, inProgressTasks} = useTask();
 
   return (
     <View style={styles.container}>
@@ -13,8 +13,12 @@ const ProfileScreen: React.FC = () => {
         style={styles.profileImage}
       />
       <Text style={styles.name}>Tasheen Darshika</Text>
-      {/* <Text style={styles.details}>Email: tasheendarshika@example.com</Text> */}
-      <Text style={styles.details}>Tasks Completed: {completedTasks.length}</Text>
+      <Text style={styles.details}>
+        Tasks Completed: {completedTasks.length}
+      </Text>
+      <Text style={styles.details}>
+        Tasks In Progress: {inProgressTasks.length}
+      </Text>
       <Text style={styles.details}>Tasks Pending: {pendingTasks.length}</Text>
     </View>
   );

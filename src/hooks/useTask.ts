@@ -47,7 +47,8 @@ export const useTask = () => {
   };
 
   const completedTasks = tasks.filter(task => task.status === 'completed');
-  const pendingTasks = tasks.filter(task => task.status !== 'completed');
+  const inProgressTasks = tasks.filter(task => task.status === 'in-progress');
+  const pendingTasks = tasks.filter(task => task.status === 'pending');
 
   return {
     tasks,
@@ -56,6 +57,7 @@ export const useTask = () => {
     editTask,
     removeTask,
     completedTasks,
+    inProgressTasks,
     pendingTasks,
   };
 };
