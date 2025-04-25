@@ -1,8 +1,6 @@
 ✅ Task Master – React Native Task Manager App
 A simple, efficient, and beautifully designed mobile task management application built using React Native CLI. Task Master helps users stay productive by allowing them to easily create, update, delete, and manage their daily tasks, all with local persistence using AsyncStorage.
 
-✅ Task Master App (React Native CLI)
-
 🧠 Features
 ✅ Add, edit, delete, and view tasks
 
