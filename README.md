@@ -1,97 +1,64 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+✅ Task Master – React Native Task Manager App
+A simple, efficient, and beautifully designed mobile task management application built using React Native CLI. Task Master helps users stay productive by allowing them to easily create, update, delete, and manage their daily tasks, all with local persistence using AsyncStorage.
 
-# Getting Started
+🧠 Features
+✅ Add, edit, delete, and view tasks
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+📌 Mark tasks as completed or pending
 
-## Step 1: Start Metro
+📊 Track task stats – total, completed, pending, in-progress
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+🙋 Profile screen with user info and task statistics
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+💾 Local data persistence using AsyncStorage
 
-```sh
-# Using npm
-npm start
+🎨 Clean and user-friendly UI
 
-# OR using Yarn
-yarn start
-```
+📱 Optimized for Android (iOS supported with additional setup)
 
-## Step 2: Build and run your app
+🛠️ Project Setup Instructions
+⚙️ Environment Setup
+Ensure you have the following installed globally:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Node.js
 
-### Android
+Java JDK (11 or 17 recommended)
 
-```sh
-# Using npm
-npm run android
+Android Studio (with Android SDK and emulator)
 
-# OR using Yarn
-yarn android
-```
+React Native CLI
 
-### iOS
+bash
+Copy
+Edit
+npm install -g react-native-cli
+🔧 Clone and Install
+bash
+Copy
+Edit
+git clone https://github.com/Tasheen2002/projectX.git
+cd projectX
+npm install
+📱 Run the App (Android Development)
+Start the Metro Bundler:
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+bash
+Copy
+Edit
+npx react-native start
+In a new terminal, run the app:
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+bash
+Copy
+Edit
+npx react-native run-android
+✅ Ensure your Android emulator is running OR a physical device is connected with USB debugging enabled.
 
-```sh
-bundle install
-```
+🎨 UI Design
+This app is inspired by a clean and minimal Figma layout.
+(Link to your Figma design can be added here)
 
-Then, and every time you update your native dependencies, run:
+🙌 Contributing
+Feel free to fork the repo, open issues, or submit PRs. Every contribution is welcome!
 
-```sh
-bundle exec pod install
-```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
