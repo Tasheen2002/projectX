@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
 import TaskComponent from '../components/TaskComponent';
@@ -24,12 +31,23 @@ const TaskScreen: React.FC<TaskScreenProps> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={tasks}
-        renderItem={renderTask}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContent}
-      />
+      {tasks.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Image
+            source={require('../assets/images/no-task.png')} // Corrected image path
+            style={styles.emptyImage}
+            resizeMode="contain"
+          />
+          <Text style={styles.emptyText}>No Tasks Available</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={tasks}
+          renderItem={renderTask}
+          keyExtractor={item => item.id}
+          contentContainerStyle={styles.listContent}
+        />
+      )}
       <TouchableOpacity
         style={styles.addButton}
         onPress={() => navigation.navigate('CreateTask')}>
@@ -49,6 +67,22 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 16,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+  emptyImage: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+  },
+  emptyText: {
+    fontSize: 18,
+    color: colors.textLight,
+    textAlign: 'center',
   },
   addButton: {
     position: 'absolute',
