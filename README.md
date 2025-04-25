@@ -1,4 +1,4 @@
-# ✅ Task Master App (React Native CLI)
+# ✅ Task Manager App (React Native CLI)
 
 A simple and efficient task manager mobile application built with **React Native CLI**. This app allows users to create, edit, delete, and manage tasks with completion tracking. It includes navigation between multiple screens, persistent storage using AsyncStorage, and a clean, user-friendly UI.
 
