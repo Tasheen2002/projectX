@@ -1,64 +1,104 @@
-✅ Task Master – React Native Task Manager App
-A simple, efficient, and beautifully designed mobile task management application built using React Native CLI. Task Master helps users stay productive by allowing them to easily create, update, delete, and manage their daily tasks, all with local persistence using AsyncStorage.
+# ✅ Task Master App (React Native CLI)
 
-🧠 Features
-✅ Add, edit, delete, and view tasks
+A simple and efficient task manager mobile application built with **React Native CLI**. This app allows users to create, edit, delete, and manage tasks with completion tracking. It includes navigation between multiple screens, persistent storage using AsyncStorage, and a clean, user-friendly UI.
 
-📌 Mark tasks as completed or pending
+---
 
-📊 Track task stats – total, completed, pending, in-progress
+## 🧠 Features
 
-🙋 Profile screen with user info and task statistics
+- Add, edit, delete, and view tasks.
+- Mark tasks as completed or pending.
+- **Filter Tasks**: Filter tasks based on their status (e.g., completed, pending. in-progress).
+- Track total and completed tasks.
+- Profile screen with task stats.
+- AsyncStorage integration for local persistence.
+- Optimized for Android (works on iOS with additional setup).
 
-💾 Local data persistence using AsyncStorage
+---
 
-🎨 Clean and user-friendly UI
+## 🛠️ Project Setup Instructions
 
-📱 Optimized for Android (iOS supported with additional setup)
+### ⚙️ Environment Setup
 
-🛠️ Project Setup Instructions
-⚙️ Environment Setup
-Ensure you have the following installed globally:
+Make sure you have the following installed globally:
 
-Node.js
+- **Node.js**
+- **Java JDK (11 or 17 recommended)**
+- **Android Studio (for Android SDK + Emulator)**
+- **React Native CLI**
 
-Java JDK (11 or 17 recommended)
-
-Android Studio (with Android SDK and emulator)
-
-React Native CLI
-
-bash
-Copy
-Edit
+```bash
 npm install -g react-native-cli
-🔧 Clone and Install
-bash
-Copy
-Edit
+```
+
+### 🔧 Clone and Install
+
+```bash
 git clone https://github.com/Tasheen2002/projectX.git
-cd projectX
+ cd projectX
 npm install
-📱 Run the App (Android Development)
-Start the Metro Bundler:
+```
 
-bash
-Copy
-Edit
+---
+
+## 📱 Run the App on Android (Development Mode)
+
+1. Start Metro bundler:
+```bash
 npx react-native start
-In a new terminal, run the app:
+```
 
-bash
-Copy
-Edit
+2. In a new terminal, run the app:
+```bash
 npx react-native run-android
-✅ Ensure your Android emulator is running OR a physical device is connected with USB debugging enabled.
+```
 
-🎨 UI Design
-This app is inspired by a clean and minimal Figma layout.
-(Link to your Figma design can be added here)
+> ✅ Make sure your Android emulator is running OR a device is connected via USB with USB debugging enabled.
 
-🙌 Contributing
-Feel free to fork the repo, open issues, or submit PRs. Every contribution is welcome!
+---
+
+## 📦 Generate APK for Production
+
+1. Navigate to the `android` directory:
+```bash
+cd android
+```
+
+2. Clean the previous build (optional):
+```bash
+./gradlew clean
+```
+
+3. Generate the release APK:
+```bash
+./gradlew assembleRelease
+```
 
 
+## 🎨 Figma Design
+
+[Figma UI Design]https://www.figma.com/design/sUDRxAYrSctkzZeY6h9LeE/Untitled?node-id=0-1&p=f&t=DrLUfUAdthxkTGy4-0
+
+---
+
+## 🎥 Demo Video
+
+
+
+
+
+
+https://github.com/user-attachments/assets/c6abcc90-41a0-4296-be79-6b540d18af1f
+
+
+---
+
+## 💬 Acknowledgements
+
+Big thanks to everyone who supported this journey ❤️
+
+---
+
+## 📩 Contact
+
+For questions, suggestions, or feedback, feel free to reach out via GitHub or darshikatasheen99@gmail.com
